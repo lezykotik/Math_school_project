@@ -1,0 +1,848 @@
+/* Общие стили */
+:root {
+    --bg-color: #222;
+    --text-color: #fff;
+    --accent-color: #7b66ff;
+    --section-bg-color: #333;
+    --transition-speed: 0.4s;
+    --border-color: #444;
+    --code-bg-color: #3a3a3a;
+    --example-bg-color: rgba(255, 255, 255, 0.05);
+    --game-bg-color: rgba(255, 255, 255, 0.05);
+    --definition-border-color: var(--accent-color);
+    --navbar-height: 60px; /*  Высота навигации */
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    overflow-y: auto;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px; /*  Убрал padding для контейнера */
+    position: relative;
+}
+
+/* Навигация */
+.navbar {
+    background-color: var(--section-bg-color);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем элементы навигации */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    margin-right: 50px; /*  Отступ справа от логотипа */
+}
+
+.logo {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color var(--transition-speed), background-color var(--transition-speed);
+    padding: 5px 8px;
+    border-radius: 5px;
+    position: relative;
+    font-size: 0.9em;
+}
+
+.nav-link:hover {
+    background-color: rgba(123, 102, 255, 0.1); /*  Подсветка при наведении */
+}
+
+/* Стиль для активной ссылки */
+.nav-link.active {
+    color: var(--accent-color); /*  Цвет активной ссылки */
+    font-weight: bold;            /*  Жирный шрифт для активной ссылки */
+    background-color: rgba(123, 102, 255, 0.2); /* Фон активной ссылки */
+}
+
+.navbar-right {
+    /*  Правая часть навигации для переключателя темы */
+    display: flex;
+    align-items: center;
+    margin-left: 50px; /* Отступ слева от переключателя темы */
+}
+
+/* Theme Toggle (переместил в навигацию) */
+.theme-toggle {
+    display: flex;
+    align-items: center; /* Вертикальное выравнивание */
+}
+
+.theme-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.theme-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    background-color: #333;
+    border-radius: 50px;
+    padding: 5px;
+    position: relative;
+    transition: background-color var(--transition-speed);
+    overflow: hidden;
+}
+
+.theme-label i {
+    font-size: 1.2em;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all var(--transition-speed) ease;
+}
+
+.theme-label i.fa-sun {
+    color: #ff0;
+    left: 5px;
+    opacity: 0;
+    transform: translateX(-30px) scale(0) rotate(180deg);
+}
+
+.theme-label i.fa-moon {
+    color: #fff;
+    left: 10px;
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
+}
+
+.theme-toggle input:checked + .theme-label {
+    background-color: #ddd;
+}
+
+.theme-toggle input:checked + .theme-label i.fa-sun {
+    transform: translateX(5px) scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+.theme-toggle input:checked + .theme-label i.fa-moon {
+    transform: translateX(-30px) scale(0) rotate(180deg);
+    opacity: 0;
+}
+
+header {
+    text-align: center;
+    padding: 70px 0 30px;  /* Уменьшили отступ сверху для контента под навигацией */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+    transition: color var(--transition-speed);
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.section {
+    background-color: var(--section-bg-color);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: 50vh;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    border-left: 5px solid var(--accent-color); /*  Добавил боковую линию для отделения */
+}
+
+h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    transition: color var(--transition-speed);
+}
+
+h3 {
+    color: var(--accent-color);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+h4 {
+    color: var(--accent-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: #9b89ff;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.button:hover {
+    background-color: #8e7eff;
+}
+
+footer {
+    background-color: var(--section-bg-color);
+    color: #bbb;
+    margin-top: 30px;
+    transition: color var(--transition-speed);
+    border-top: 1px solid var(--border-color); /*  Разделительная линия */
+    width: 100%;                   /*  Растягиваем на всю ширину */
+    border-radius: 8px 8px 0px 0px;
+}
+
+/* Выделение цветом в шкале вероятности */
+.prob-zero { color: red; font-weight: bold; }
+.prob-low { color: orange; }
+.prob-fifty { color: yellowgreen; }
+.prob-high { color: lightgreen; }
+.prob-one { color: darkgreen; font-weight: bold; }
+
+/* Стили для интерактивной игры */
+.interactive-game {
+    background-color: var(--example-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.interactive-game input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    margin-right: 10px;
+    color: var(--text-color);
+    background-color: var(--code-bg-color);
+}
+
+.interactive-game button {
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.interactive-game button:hover {
+    background-color: #8e7eff;
+}
+
+.interactive-game #result {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Стили для раздела 2 */
+
+/* Стили для стратегий ставок */
+.strategy {
+    background-color: var(--example-bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Важное сообщение */
+.important {
+    background-color: rgba(255, 0, 0, 0.1); /*  Красный оттенок */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #ff4d4d; /*  Более яркий красный цвет текста */
+}
+
+/* Для информации о подсчете карт */
+.systems, .pros-cons, .legal {
+    background-color: var(--example-bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для блефа в покере */
+.bluffing {
+    background-color: var(--game-bg-color); /* Используем стиль game */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Стили для использования солверов */
+.tools {
+    background-color: var(--example-bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Стили для блекджека*/
+/* Стили для заголовка и подзаголовка Блекджека */
+.blackjack-title {
+    text-align: center;
+    font-size: 2em;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.blackjack-subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* Стили для карточной области в блекджеке */
+.card-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Расстояние между картами */
+    margin-bottom: 10px;
+    justify-content: center; /* Карты по центру */
+}
+
+/* Стили для отдельных карт (можно добавить фон с картинкой карт) */
+.card {
+    width: 50px; /*  Ширина карты */
+    height: 70px; /* Высота карты */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    background-color: #fff; /*  Белый фон для карт */
+    color: #000;             /* Черный цвет текста */
+}
+
+/* Стили для области блекджека (для центрирования) */
+#blackjack-game {
+    text-align: center; /* Центрирование всего содержимого */
+}
+
+/* Стили для кнопок */
+#blackjack-game button {
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    margin: 5px; /* Отступ между кнопками */
+}
+
+#blackjack-game button:hover {
+    background-color: #8e7eff;
+}
+
+/* Темная тема (по умолчанию) */
+
+/* Светлая тема */
+.light-theme {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --accent-color: #1e90ff;
+    --section-bg-color: #fff;
+    --border-color: #ccc;
+    --code-bg-color: #eee;
+    --example-bg-color: #f9f9f9;
+    --game-bg-color: #f9f9f9;
+    --definition-border-color: #1e90ff;
+}
+
+
+/*  ... остальная часть CSS  */
+/* Стили для секции комментариев */
+.comments-section {
+    margin-top: 60px;
+    padding: 20px;
+    background-color: var(--section-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed);
+}
+
+.comments-section h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    transition: color var(--transition-speed);
+}
+
+/* Разделение на колонки */
+.comments-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки равной ширины */
+    gap: 20px; /* Расстояние между колонками */
+}
+
+.comment-form-column {
+    /* Стиль для формы */
+    margin-right: 50px;
+}
+
+.comment-list-column {
+    /* Стиль для списка комментариев */
+    max-height: 400px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Стиль для внутреннего контейнера списка комментариев */
+#comment-list-inner {
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+.comments-section label {
+    display: block;
+    color: var(--text-color);
+    transition: color var(--transition-speed);
+}
+
+.comments-section input[type="text"],
+.comments-section textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--code-bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    resize: none; /*  Запрещаем изменение размера текстового поля */
+    padding-bottom: 44px;
+    overflow: hidden;
+}
+
+.comments-section button[type="submit"] {
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.comments-section button[type="submit"]:hover {
+    background-color: #8e7eff;
+}
+
+/* Стиль для отдельного комментария */
+.comment {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--code-bg-color);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+/* Стили для автора и текста комментария */
+.comment .comment-author {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    transition: color var(--transition-speed);
+}
+
+.comment .comment-text {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    transition: color var(--transition-speed);
+}
+
+/* Стили для кнопок лайков/дизлайков и жалоб */
+.comment-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Размещаем элементы по краям */
+}
+
+.comment-actions button {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1em;
+    transition: color var(--transition-speed);
+    padding: 5px; /* Добавляем padding для кликабельности */
+    border-radius: 4px; /* Закругленные углы */
+}
+
+.comment-actions button:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.05); /* Небольшой фон при наведении */
+}
+
+.comment-actions i {
+    margin-right: 5px; /* Отступ между иконкой и текстом */
+}
+
+.comment-actions .likes-dislikes {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между лайками и дизлайками */
+}
+
+.comment-actions .like-button.liked,
+.comment-actions .dislike-button.disliked {
+    color: var(--accent-color); /* Подсвечиваем нажатую кнопку */
+}
+
+/* Стиль для кнопки "Пожаловаться" */
+.comment-actions .report-button {
+    color: #f00; /* Красный цвет для жалобы */
+}
+
+.comment-actions .report-button:hover {
+    background-color: rgba(255, 0, 0, 0.1); /*  Красный фон при наведении */
+}
+
+/* Для страницы модерации */
+#moderation-list {
+    margin-top: 20px;
+}
+
+#moderation-list .comment {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+#moderation-list .comment.reported {
+    border-color: #f00;  /* Красная рамка */
+    background-color: rgba(255, 0, 0, 0.1);  /*  Красный фон */
+}
+
+#moderation-list .comment-author {
+    font-weight: bold;
+}
+
+/* Стили для кнопок на странице модерации */
+#moderation-list button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    margin: 2px; /* Добавляем небольшой отступ между кнопками */
+}
+
+/* Стиль для кнопки "Одобрить" */
+.approve-button {
+    background-color: #28a745; /* Зеленый цвет для одобрения */
+    color: #fff;
+}
+
+.approve-button:hover {
+    background-color: #218838; /*  Более темный зеленый при наведении */
+}
+
+/* Стиль для кнопки "Удалить" */
+.delete-button {
+    background-color: #dc3545; /* Красный цвет для кнопки удаления */
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Более темный красный при наведении */
+}
+
+/* Стили для секции согласия с правилами */
+.agreement-section {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.agreement-section input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.agreement-section label {
+    color: var(--text-color);
+    transition: color var(--transition-speed);
+    cursor: pointer;
+}
+
+.agreement-section a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.agreement-section a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон с большей прозрачностью */
+    opacity: 0;            /*  Изначально полностью прозрачен */
+    display: flex;         /*  Используем flex для выравнивания */
+    justify-content: center;/*  Центрируем по горизонтали */
+    align-items: center;   /*  Центрируем по вертикали */
+    z-index: 1000;          /*  Над всеми элементами */
+    pointer-events: none;  /*  Отключаем взаимодействие с мышью */
+    transition: opacity var(--transition-speed) ease-in-out; /*  Анимация прозрачности */
+}
+
+.popup.show {
+    opacity: 1;            /*  Делаем полностью видимым */
+    pointer-events: auto;   /*  Включаем взаимодействие с мышью */
+}
+
+.popup-content {
+    background-color: var(--section-bg-color);
+    padding: 30px; /* Увеличили padding */
+    border-radius: 12px; /* Увеличили скругление */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Добавили тень */
+    width: 80%;
+    max-width: 600px;
+    position: relative; /* Для позиционирования кнопки закрытия */
+    color: var(--text-color);
+    opacity: 0;              /*  Изначально полностью прозрачен */
+    transform: translateY(-20px); /*  Смещаем вверх */
+    transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out; /* Добавлена анимация */
+}
+
+.popup.show .popup-content {
+    opacity: 1;              /*  Делаем полностью видимым */
+    transform: translateY(0);/*  Возвращаем на место */
+}
+
+.popup-content h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;  /*  Увеличили отступ */
+    text-align: center;  /*  Центрируем заголовок */
+    transition: color var(--transition-speed);
+}
+
+.popup-content ol {
+    padding-left: 30px;  /* Увеличили отступ слева */
+    margin-bottom: 20px; /* Добавили отступ снизу */
+}
+
+.popup-content li {
+    margin-bottom: 12px; /* Увеличили отступ между пунктами */
+    line-height: 1.5; /* Улучшили читаемость */
+}
+
+.popup-content .close-button {
+    position: absolute;
+    top: 0px;  /*  Увеличили отступ сверху */
+    right: 15px;  /*  Увеличили отступ справа */
+    font-size: 2em; /* Увеличили размер кнопки закрытия */
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color var(--transition-speed);
+}
+
+.popup-content .close-button:hover {
+    color: #bbb;
+}
+
+/* Дата публикации комментария */
+.comment-date {
+    font-size: 0.75rem;               /*  Уменьшаем размер шрифта */
+    color: #888;                  /*  Приглушаем цвет текста */
+    margin-left: 7%;
+    margin-top: 0px;                /*  Отступы слева и справа */
+    align-self: center;             /*  Выравниваем по вертикали */
+}
+
+/* Стили для футера */
+.footer-content {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.8em;
+    color: #bbb;
+    transition: color var(--transition-speed);
+}
+
+.footer-container {
+    display: flex;               /*  Используем flexbox для выравнивания */
+    justify-content: space-between; /*  Размещаем элементы по краям */
+    align-items: center;           /*  Выравниваем по вертикали */
+    padding: 0 20px;              /*  Добавляем padding для контента */
+    max-width: 960px;              /*  Ограничиваем ширину контента внутри */
+    margin: 0 auto;                /*  Центрируем по горизонтали */
+}
+
+
+.social-icons {
+    /*  Ничего не меняем для social-icons, достаточно настроек flex */
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #bbb;
+    font-size: 1.5em;
+    transition: color var(--transition-speed);
+}
+
+.social-icons a:hover {
+    color: var(--accent-color);
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.animation-toggle button {
+    background-color: transparent; /*  Убираем фон */
+    color: var(--text-color);
+    border: none;
+    padding: 5px; /* Уменьшаем отступы */
+    border-radius: 50%; /* Круглая форма */
+    cursor: pointer;
+    transition: color var(--transition-speed); /* Анимируем цвет */
+    margin-left: 10px;
+    font-size: 1.2em; /* Увеличиваем размер иконки */
+}
+
+.animation-toggle button:hover {
+    color: var(--accent-color); /* Меняем цвет при наведении */
+}
+
+.animation-toggle button i {
+    /*  Для центрирования иконки (если необходимо) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Кастомный скроллбар для списка комментариев */
+#comments-list::-webkit-scrollbar {
+    width: 8px;
+    /* Убираем кнопки скроллбара */
+    -webkit-appearance: none; /* Отключаем стандартное оформление */
+}
+
+#comments-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#comments-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#comments-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#comment-list-column::-webkit-scrollbar {
+    width: 8px; /* Ширина скроллбара */
+}
+
+#comment-list-column::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет фона трека */
+}
+
+#comment-list-column::-webkit-scrollbar-thumb {
+    background: #888; /* Цвет ползунка */
+    border-radius: 4px; /* Закругление углов ползунка */
+}
+
+#comment-list-column::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Цвет ползунка при наведении */
+}
+
+/* Кастомный скроллбар для основной страницы */
+body::-webkit-scrollbar {
+    width: 8px; /* Ширина скроллбара */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет фона трека */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888; /* Цвет ползунка */
+    border-radius: 4px; /* Закругление углов ползунка */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Цвет ползунка при наведении */
+}
