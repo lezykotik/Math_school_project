@@ -846,3 +846,50 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background: #555; /* Цвет ползунка при наведении */
 }
+
+@media (max-width: 768px) {
+    /*  Стили для navbar */
+    .navbar {
+        flex-direction: column; /*  Выстраиваем элементы navbar в столбик */
+        align-items: stretch; /*  Растягиваем элементы на всю ширину */
+        padding: 10px;
+    }
+
+    .navbar-left {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .navbar-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-right .theme-toggle {
+        margin-bottom: 10px;
+    }
+    .comment-list-column{
+        padding: 10px;
+        margin:0;
+    }
+    .comment{
+        margin: 0px;
+        padding:10px;
+    }
+    .comment-text{
+        font-size:12px;
+    }
+    .comment-author{
+        font-size:12px;
+    }
+    /*  Стили для контейнера (если необходимо) */
+    .container {
+        padding: 10px;
+    }
+    .comment-header{
+        font-size: 10px;
+    }
+
+    /* Стили для других элементов (по необходимости) */
+}
