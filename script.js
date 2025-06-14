@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+
     // Canvas Matrix Effect by Erik Terwan
     const canvas = document.getElementById('background-canvas');
     const ctx = canvas.getContext('2d');
