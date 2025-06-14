@@ -1033,8 +1033,8 @@ body::-webkit-scrollbar-thumb:hover {
         gap: 5px; /* Уменьшаем отступ между кнопками */
     }
 
-    .animation-toggle button i {
-        margin-right: 40px;
+    .theme-label {
+        margin-right: 20px;
     }
 
     .nav-links {
@@ -1107,5 +1107,13 @@ body::-webkit-scrollbar-thumb:hover {
         width: 90%;
         max-width: 90%;
         padding: 20px;
+    }
+
+    #background-canvas {
+        display: none; /* Скрываем canvas с анимацией */
+    }
+
+    .animation-toggle {
+        display: none; /* Скрываем кнопку переключения анимации */
     }
 }
