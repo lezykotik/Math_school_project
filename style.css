@@ -11,10 +11,15 @@
     --game-bg-color: rgba(255, 255, 255, 0.05);
     --definition-border-color: var(--accent-color);
     --navbar-height: 60px; /*  Высота навигации */
+
+     /* Шрифты */
+    --heading-font: "Montserrat", sans-serif;
+    --body-font: "Nunito Sans", sans-serif;
+    --monospace-font: "Source Code Pro", monospace;
 }
 
 body {
-    font-family: sans-serif;
+    font-family: var(--body-font);
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
@@ -74,10 +79,13 @@ body {
     border-radius: 5px;
     position: relative;
     font-size: 0.9em;
+    margin-bottom: 2px; /* Добавляем отступ снизу */
 }
 
-.nav-link:hover {
+.nav-link:not(.active):hover {
     background-color: rgba(123, 102, 255, 0.1); /*  Подсветка при наведении */
+    margin-bottom: 0;  /* Убираем отступ снизу при наведении */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавляем тень */
 }
 
 /* Стиль для активной ссылки */
@@ -119,11 +127,20 @@ body {
     overflow: hidden;
 }
 
+.theme-label:hover {
+    color: var(--accent-color); /* Меняем цвет при наведении */
+}
+
+
 .theme-label i {
     font-size: 1.2em;
     position: absolute;
     backface-visibility: hidden;
     transition: all var(--transition-speed) ease;
+}
+
+.theme-label i:hover {
+    color: var(--accent-color); /* Меняем цвет при наведении */
 }
 
 .theme-label i.fa-sun {
@@ -133,11 +150,19 @@ body {
     transform: translateX(-30px) scale(0) rotate(180deg);
 }
 
+.theme-label i.fa-sun:hover {
+    color: var(--accent-color); /* Меняем цвет при наведении */
+}
+
 .theme-label i.fa-moon {
     color: #fff;
     left: 10px;
     opacity: 1;
     transform: translateX(0) scale(1) rotate(0deg);
+}
+
+.theme-label i.fa-moon:hover {
+    color: var(--accent-color); /* Меняем цвет при наведении */
 }
 
 .theme-toggle input:checked + .theme-label {
@@ -157,6 +182,32 @@ body {
 header {
     text-align: center;
     padding: 70px 0 30px;  /* Уменьшили отступ сверху для контента под навигацией */
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--heading-font);
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    transition: color var(--transition-speed);
+}
+
+.formula {
+    background-color: var(--code-bg-color);
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center; /* Центрируем текст горизонтально */
+    margin-top: 10px; /* Добавляем отступ сверху */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formula:hover {
+    transform: scale(1.03); /* Слегка увеличиваем контейнер при наведении */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formula-text {
+    color: var(--text-color);
+    font-family: var(--monospace-font); /* Используем моноширинный шрифт для формулы */
 }
 
 h1 {
@@ -180,6 +231,15 @@ p {
     min-height: 50vh;
     transition: background-color var(--transition-speed), color var(--transition-speed);
     border-left: 5px solid var(--accent-color); /*  Добавил боковую линию для отделения */
+    opacity: 0;
+    transform: translateY(50px); /* Сдвигаем вниз */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Класс для показа секции с анимацией */
+.section.show {
+    opacity: 1;
+    transform: translateY(0); /* Возвращаем на исходную позицию */
 }
 
 h2 {
@@ -221,6 +281,7 @@ a {
 
 a:hover {
     color: #9b89ff;
+    text-shadow: 0 0 2px var(--accent-color); /* Добавляем свечение при наведении */
 }
 
 .button {
@@ -231,10 +292,13 @@ a:hover {
     border-radius: 8px;
     text-decoration: none;
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    transition: background-color var(--transition-speed), transform 0.2s ease;
 }
 
 .button:hover {
     background-color: #8e7eff;
+    transform: translateY(-3px); /* Сдвигаем кнопку вверх при наведении */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Усиливаем тень */
 }
 
 footer {
@@ -248,13 +312,78 @@ footer {
 }
 
 /* Выделение цветом в шкале вероятности */
-.prob-zero { color: red; font-weight: bold; }
-.prob-low { color: orange; }
-.prob-fifty { color: yellowgreen; }
-.prob-high { color: lightgreen; }
-.prob-one { color: darkgreen; font-weight: bold; }
+/* Выделение цветом в шкале вероятности */
+/* Выделение цветом в шкале вероятности */
 
-/* Стили для интерактивной игры */
+.prob-zero, .prob-low, .prob-fifty, .prob-high, .prob-one {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prob-zero:hover, .prob-low:hover, .prob-fifty:hover, .prob-high:hover, .prob-one:hover {
+    transform: scale(1.05); /* Слегка увеличиваем элемент при наведении */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prob-zero {
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(200, 0, 0)); /* Красный */
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 0, 0);
+}
+
+.prob-low {
+    color: #fff;
+    background: linear-gradient(to right, rgb(255, 165, 0), rgb(200, 120, 0)); /* Оранжевый */
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 120, 0);
+}
+
+.prob-fifty {
+    color: #000;
+    background: linear-gradient(to right, rgb(255, 255, 0), rgb(200, 200, 0)); /* Желтый */
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 200, 0);
+}
+
+.prob-high {
+    color: #000;  /* черный, чтобы лучше читался на светлом фоне */
+    background: linear-gradient(to right, rgb(173, 255, 47), rgb(130, 200, 30)); /* Светло-зеленый */
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(130, 200, 30);
+}
+
+.prob-one {
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(0, 255, 0), rgb(0, 200, 0)); /* Зеленый */
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 200, 0);
+}
+
+.interactive-game input[type="number"]:focus,
+.comments-section textarea:focus,
+.comments-section input[type="text"]:focus {
+    border-color: var(--accent-color); /* Подсвечиваем поле ввода при фокусе */
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.interactive-game button, .comments-section button[type="submit"] {
+    /* ... существующие стили ... */
+    transition: background-color var(--transition-speed), transform 0.2s ease;
+}
+
+.interactive-game button:hover, .comments-section button[type="submit"]:hover {
+    background-color: #8e7eff;
+    transform: scale(1.05); /* Увеличиваем кнопку при наведении */
+}
+
 .interactive-game {
     background-color: var(--example-bg-color);
     padding: 20px;
@@ -299,6 +428,15 @@ footer {
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+.strategy, .important, .systems, .pros-cons, .legal, .bluffing, .tools {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.strategy:hover, .important:hover, .systems:hover, .pros-cons:hover, .legal:hover, .bluffing:hover, .tools:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Важное сообщение */
@@ -371,7 +509,13 @@ footer {
     font-size: 1.2em;
     background-color: #fff; /*  Белый фон для карт */
     color: #000;             /* Черный цвет текста */
+    transition: transform 0.2s ease;
 }
+
+.card:hover {
+    transform: scale(1.1); /* Увеличиваем карту при наведении */
+}
+
 
 /* Стили для области блекджека (для центрирования) */
 #blackjack-game {
@@ -388,10 +532,12 @@ footer {
     cursor: pointer;
     transition: background-color var(--transition-speed);
     margin: 5px; /* Отступ между кнопками */
+    transition: background-color var(--transition-speed), transform 0.2s ease;
 }
 
 #blackjack-game button:hover {
     background-color: #8e7eff;
+    transform: scale(1.05); /* Увеличиваем кнопку при наведении */
 }
 
 /* Темная тема (по умолчанию) */
@@ -480,7 +626,6 @@ footer {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color var(--transition-speed);
 }
 
 .comments-section button[type="submit"]:hover {
@@ -527,11 +672,13 @@ footer {
     transition: color var(--transition-speed);
     padding: 5px; /* Добавляем padding для кликабельности */
     border-radius: 4px; /* Закругленные углы */
+    transition: color var(--transition-speed), transform 0.2s ease;
 }
 
 .comment-actions button:hover {
     color: var(--accent-color);
     background-color: rgba(255, 255, 255, 0.05); /* Небольшой фон при наведении */
+    transform: scale(1.1);
 }
 
 .comment-actions i {
@@ -554,8 +701,12 @@ footer {
     color: #f00; /* Красный цвет для жалобы */
 }
 
+
+
 .comment-actions .report-button:hover {
     background-color: rgba(255, 0, 0, 0.1); /*  Красный фон при наведении */
+    color: #ff4d4d;
+    transform: scale(1.1);
 }
 
 /* Для страницы модерации */
@@ -847,3 +998,114 @@ body::-webkit-scrollbar-thumb:hover {
     background: #555; /* Цвет ползунка при наведении */
 }
 
+@media (max-width: 767px) {
+    body {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    header {
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px; /* Добавляем padding */
+    }
+
+    .navbar-left {
+        margin: 0;
+        flex-grow: 1; /* Логотип занимает доступное место */
+    }
+
+    .navbar-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 20;
+        gap: 5px; /* Уменьшаем отступ между кнопками */
+    }
+
+    .animation-toggle button i {
+        margin-right: 40px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .logo {
+        pointer-events: none;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1.1em;
+    }
+
+    .section {
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: auto;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+
+    .interactive-game input[type="number"] {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .interactive-game button {
+        width: 80%;
+    }
+
+    .comments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comment-form-column,
+    .comment-list-column {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #comment-list-inner {
+        max-height: 300px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-icons {
+        margin-bottom: 10px;
+    }
+
+    .popup-content {
+        width: 90%;
+        max-width: 90%;
+        padding: 20px;
+    }
+}
