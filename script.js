@@ -68,9 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (themeSwitchCount === 10 && !isMobile) {
             //  Показываем alert
             alert("Молодец, ты нашел баг!");
-
-            // Отключаем переключатель темы (или делаем что-то еще, чтобы баг нельзя было повторить)
-            themeSwitch.disabled = true;
         }
     });
     // *******************************************************************
