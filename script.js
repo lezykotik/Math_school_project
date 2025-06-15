@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Интеграция alert() после 10 переключений темы (ТОЛЬКО НА ДЕСКТОПЕ)
     let themeSwitchCount = 0;
 
-    // Используем matchMedia для определения мобильных устройств
-    const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+    // Более надежное определение мобильных устройств
+    const isMobile = (window.matchMedia("only screen and (max-width: 760px)").matches) ||
+                     ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0);
 
     // Функция для переключения темы (изменено)
     themeSwitch.addEventListener('change', function(e) {
