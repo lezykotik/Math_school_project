@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Получение элементов
+    // Получение элементов (оставлены без изменений)
     const themeSwitch = document.getElementById('theme-switch');
     const body = document.body;
     const animationButton = document.getElementById('animation-button');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const commentName = document.getElementById('name');
     const commentError = document.getElementById('comment-error');
 
-    // Цвета для Canvas
+    // Цвета для Canvas (оставлены без изменений)
     const darkThemeIconColor = 'rgba(255, 255, 255, 0.1)'; // Белый для темной темы
     const lightThemeIconColor = 'rgba(0, 0, 0, 0.1)';     // Черный для светлой темы
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const font = '24px FontAwesome';
     let currentIconColor = darkThemeIconColor; // Изначальный цвет - для темной теме
 
-    // Проверяем сохраненную тему при загрузке страницы
+    // Проверяем сохраненную тему при загрузке страницы (оставлено без изменений)
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         themeSwitch.checked = true;
@@ -39,7 +39,37 @@ document.addEventListener('DOMContentLoaded', function() {
         currentIconColor = lightThemeIconColor; // Устанавливаем цвет для светлой темы
     }
 
-    // Функция для переключения анимации
+    // *******************************************************************
+    // Интеграция alert() после 10 переключений темы
+    let themeSwitchCount = 0;
+
+    // Функция для переключения темы (изменено)
+    themeSwitch.addEventListener('change', function(e) {
+        themeSwitchCount++; // Увеличиваем счетчик переключений темы
+
+        if (e.target.checked) {
+            body.classList.add('light-theme');
+            localStorage.setItem('theme', 'light');
+            currentIconColor = lightThemeIconColor;
+        } else {
+            body.classList.remove('light-theme');
+            localStorage.setItem('theme', 'dark');
+            currentIconColor = darkThemeIconColor;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищаем canvas
+        init();
+        animate();
+
+        // Проверяем, достигло ли количество переключений темы 10
+        if (themeSwitchCount === 10) {
+            //  Показываем alert
+            alert("Молодец, ты нашел баг!");
+        }
+    });
+    // *******************************************************************
+
+    // Функция для переключения анимации (оставлено без изменений)
     animationButton.addEventListener('click', function() {
         animationEnabled = !animationEnabled;
         if (animationEnabled) {
@@ -53,9 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
-    // Canvas Matrix Effect by Erik Terwan
+    // Canvas Matrix Effect by Erik Terwan (оставлено без изменений)
     const canvas = document.getElementById('background-canvas');
     const ctx = canvas.getContext('2d');
 
