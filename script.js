@@ -40,8 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // *******************************************************************
-    // Интеграция alert() после 10 переключений темы
+    // Интеграция alert() после 10 переключений темы (ТОЛЬКО НА ДЕСКТОПЕ)
     let themeSwitchCount = 0;
+
+    // Проверяем, является ли устройство мобильным
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // Функция для переключения темы (изменено)
     themeSwitch.addEventListener('change', function(e) {
@@ -61,10 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
         init();
         animate();
 
-        // Проверяем, достигло ли количество переключений темы 10
-        if (themeSwitchCount === 10) {
+        // Проверяем, достигло ли количество переключений темы 10 и является ли устройство десктопным
+        if (themeSwitchCount === 10 && !isMobile) {
             //  Показываем alert
             alert("Молодец, ты нашел баг!");
+
+            // Отключаем переключатель темы (или делаем что-то еще, чтобы баг нельзя было повторить)
+            themeSwitch.disabled = true;
         }
     });
     // *******************************************************************
